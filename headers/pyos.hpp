@@ -1,6 +1,8 @@
 #include "iostream"
 #include "stdio.h"
 #include "fstream"
+#include "filesystem"
+#include <boost/filesystem.hpp>
 
 #if defined(_WIN32)
     #define PLATFORM_NAME "windows"
@@ -34,6 +36,7 @@ class Os{
         std::string filenotfound = "pycom: FileNotFoundError: ";
 
     public:
+        // No exceptions on failed process, just return error code
         int system(const char * cmd){
             int code = std::system(cmd);
             return code;
@@ -42,32 +45,64 @@ class Os{
             return code;
         }
 
+        // Throw exception if returned bool is false, else it was successful
         void remove(const char * filename){
-            int code = std::remove(filename);
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(filename) + " does not exist"}; exit(1);}
+            std::filesystem::__cxx11::path pfilename = filename;
+
+            if (!std::filesystem::remove(pfilename)){
+                // Throw std::filesystem::__cxx11::filesystem_error; not implemented
+            }
             
         } void remove(std::string filename){
-            int code = std::remove(filename.c_str());
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(filename) + " does not exist"}; exit(1);}
-            
+            std::filesystem::__cxx11::path pfilename = filename;
+
+            if (!std::filesystem::remove(pfilename)){
+                // Throw std::filesystem::__cxx11::filesystem_error; not implemented
+            }
         }
 
+        // Throws std::filesystem::__cxx11::filesystem_error automatically if file not found
         void rename(const char * old, const char * _new){
-            int code = std::rename(old, _new);
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(old) + " does not exist"};}
+            std::filesystem::__cxx11::path oldp = old;
+            std::filesystem::__cxx11::path newp = _new;
+            std::filesystem::rename(oldp, newp);
             
         } void rename(std::string old, const char * _new){
-            int code = std::rename(old.c_str(), _new);
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(old) + " does not exist"};}
+            std::filesystem::__cxx11::path oldp = old;
+            std::filesystem::__cxx11::path newp = _new;
+            std::filesystem::rename(oldp, newp);
             
         } void rename(std::string old, std::string _new){
-            int code = std::rename(old.c_str(), _new.c_str());
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(old) + " does not exist"};}
+            std::filesystem::__cxx11::path oldp = old;
+            std::filesystem::__cxx11::path newp = _new;
+            std::filesystem::rename(oldp, newp);
             
         } void rename(const char * old, std::string _new){
-            int code = std::rename(old, _new.c_str());
-            if(code != 0){throw std::runtime_error{filenotfound + std::string(old) + " does not exist"};}
+            std::filesystem::__cxx11::path oldp = old;
+            std::filesystem::__cxx11::path newp = _new;
+            std::filesystem::rename(oldp, newp);
         }
 
-        
+        // Throws std::filesystem::__cxx11::filesystem_error automatically if file not found
+        void chdir(const char * path){
+            std::filesystem::current_path(path);
+        } void chdir(std::string path){
+            std::filesystem::current_path(path);
+        }
+
+        void mkdir(const char * path){
+            std::filesystem::create_directory(path);
+        } void mkdir(std::string path){
+            std::filesystem::create_directory(path);
+        }
+
+        void rmdir(const char * path){
+            // Not implemented
+        } void rmdir(std::string path){
+            // Not implemented
+        }
+
+        std::string getcwd(){
+            return std::filesystem::current_path();
+        }
 };

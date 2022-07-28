@@ -1,7 +1,7 @@
 import os
 
 try:
-    os.remove("d")
+    os.chdir("fff")
 
 except FileNotFoundError:
-    print("caught")
+    print("?")
