@@ -41,7 +41,8 @@ implemented = [
 ]
 
 pyexceptiontocpp = {
-    "Exception": "std::runtime_error",
+    "Exception": "...",
+    "FileNotFoundError": "std::filesystem::__cxx11::filesystem_error"
     
 }
 
@@ -336,10 +337,6 @@ class Compile:
             elif self.oktokens[i][self.type] == "NAME":
                 if self.oktokens[i][self.value] in pyexceptiontocpp:
                     code += pyexceptiontocpp[self.oktokens[i][self.value]]
-
-                elif str(self.oktokens[i][self.value]).endswith("Error"):
-                    code += "const std::runtime_error& e"
-
                 else:
                     code += self.oktokens[i][self.value]
 
