@@ -4,7 +4,7 @@
 
 #### Supported platforms: Windows, Linux
 
-## Table of Contest
+## Table of Contents
 
 - [What is Pycom?](#what-is-pycom)
 - [Why and when?](#why-and-when-use-pycom)
