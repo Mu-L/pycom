@@ -80,7 +80,7 @@ def run_compile(flags: Namespace):
         cmd = shlex.split(cmd)
 
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
-                            stderr=subprocess.PIPE, shell=True)
+                               stderr=subprocess.PIPE, shell=True)
 
     if _platform != "Linux":
         process.stdin.write(str.encode(compiledcode))
@@ -94,7 +94,8 @@ def run_compile(flags: Namespace):
         print(f"[INFO]: Finished compiling '{filename}';\n")
 
     if error != b"":
-        errorstr = errors.cpperrortopycomerror(error.decode('utf-8')) if not gpp_errors else error.decode('utf-8')
+        errorstr = errors.cpperrortopycomerror(error.decode(
+            'utf-8')) if not gpp_errors else error.decode('utf-8')
         if not gpp_errors and not check:
             print(red(f"pycom: CompilationError:\n{errorstr}"))
 
@@ -102,28 +103,36 @@ def run_compile(flags: Namespace):
             print(red(errorstr))
 
         if check:
-            print(red(f"[INFO]: Errors in the compilation of '{filename}'; unsuccessful check"))
+            print(
+                red(f"[INFO]: Errors in the compilation of '{filename}'; unsuccessful check"))
 
         if failprint:
             print(compiledcode)
             exit(1)
 
     if output == b"":
-        filename = filename.split('.')[0].replace("/", "\\\\") if _platform != "Linux" else filename.split('.')[0]
+        filename = filename.split('.')[0].replace(
+            "/", "\\\\") if _platform != "Linux" else filename.split('.')[0]
         if info and not check:
-            print(f"[INFO] Successfully compiled '{filename}' in {round(end_time-start_time, 2)}s ({round(end_time-start_time, 2) * 1000}ms)\n")
+            print(
+                f"[INFO] Successfully compiled '{filename}' in {round(end_time-start_time, 2)}s ({round(end_time-start_time, 2) * 1000}ms)\n")
 
         if check:
-            print(f"[INFO] No errors in the compilation of '{filename}.py'; successful check")
-            os.remove(filename.split('.')[0]) if _platform == "Linux" else os.remove(filename + ".exe")
+            print(
+                f"[INFO] No errors in the compilation of '{filename}.py'; successful check")
+            os.remove(filename.split('.')[0]) if _platform == "Linux" else os.remove(
+                filename + ".exe")
             exit(0)
 
         if run_and_del:
-            os.system(f"./{filename.split('.')[0]}") if _platform == "Linux" else os.system(f".\{filename}.exe")
-            os.remove(filename.split('.')[0]) if _platform == "Linux" else os.remove(filename + ".exe")
+            os.system(
+                f"./{filename.split('.')[0]}") if _platform == "Linux" else os.system(f".\{filename}.exe")
+            os.remove(filename.split('.')[0]) if _platform == "Linux" else os.remove(
+                filename + ".exe")
 
         elif run:
-            os.system(f"./{filename.split('.')[0]}") if _platform == "Linux" else os.system(f".\{filename}.exe")
+            os.system(
+                f"./{filename.split('.')[0]}") if _platform == "Linux" else os.system(f".\{filename}.exe")
 
 
 def main():
