@@ -1,8 +1,4 @@
-colorama
-"""
-Linux:
-    sudo apt-get install libboost-all-dev
-
-Windows:
-    https://www.boost.org/users/history/version_1_79_0.html
-"""
+# sudo apt-get install libboost-all-dev
+colorama==0.4.5
+setuptools==63.2.0
+pytest==7.1.2

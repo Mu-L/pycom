@@ -4,7 +4,6 @@ import os
 import platform
 import shlex
 import subprocess
-import sys
 import time
 from argparse import Namespace
 
@@ -125,7 +124,7 @@ def run_compile(flags: Namespace):
         if check:
             print(f"[INFO] No errors in the compilation of '{filename}.py'; successful check")
             os.remove(filename.split('.')[0]) if _platform == "Linux" else os.remove(filename + ".exe")
-            exit(1)
+            exit(0)
 
         if run_and_del:
             os.system(f"./{filename.split('.')[0]}") if _platform == "Linux" else os.system(f".\{filename}.exe")

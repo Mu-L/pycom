@@ -3,7 +3,7 @@ import time
 import platform
 
 if __name__ == "__main__":
-    testdir = os.listdir("./tests/")
+    testdir = os.listdir("/")
     for file in testdir:
         code = os.system(f"pycom -c tests/{file}") if platform.system() == "Linux" else os.system(f"pycom -c tests\\\\{file}")
 
