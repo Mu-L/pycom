@@ -55,14 +55,6 @@ def run_compile(flags: Namespace):
         filename=filename
     ).iteratetokens()
 
-    if debug:
-        with open("temptests/test.txt", "w") as f:
-            f.write("")
-        with open("temptests/test.txt", "a+") as f:
-            for i in tokens:
-                f.write(str(i) + "\n")
-            exit(1)
-
     if print_tokens:
         print(tokens)
         exit(1)
