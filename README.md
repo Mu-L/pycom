@@ -4,6 +4,24 @@
 
 #### Supported platforms: Windows, Linux
 
+## Table of Contest
+
+- [What is Pycom?](#what-is-pycom)
+- [Why and when?](#why-and-when-use-pycom)
+- [Examples](#examples)
+- [Benchmarks](#speed-benchmarks-and-comparisons)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Flags](#flags)
+- [Dependencies](#python-dependencies)
+- [Tests](#run-tests)
+- [Supported Features](#supported-features)
+- [Features Not Yet Supported](#not-supported-yet)
+- [Differences to CPython](#small-quirks-and-differences-to-cpython)
+- [Contributing](CONTRIBUTING.md)
+
+
+
 ## Installation
 
 Simply:
@@ -174,7 +192,3 @@ It's inconvenient and the latter may be supported sometime, but this is just how
 
 I will work on trying to remove these exceptions and quirks and try to make Pycom and CPython completely identical,
 but right now, it is quite experimental and has quite a bit of room for improvement.
-
-## Contributing
-
-Read 'CONTRIBUTING.txt'.
