@@ -60,11 +60,11 @@ If you followed the installation instructions correctly, this will work in every
     Check if the program will compile without actually compiling it. Defaults to off.
 
 ### Python dependencies:
-> Python version 3.10+
+> Python version 3.10+  
 > 'colorama' module (install with pip install -r requirements.txt)
 
 ### C++ dependencies:
-> A recent version of the g++ compiler
+> A recent version of the g++ compiler  
 > The Boost C++ library; download here: https://www.boost.org/users/history/version_1_79_0.html (put the folder into usr/gcc/include/)
 
 ### Run tests
