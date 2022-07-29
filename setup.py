@@ -4,7 +4,7 @@ setup(
     version='1.0.0',
     entry_points={
         'console_scripts': [
-            'pycom=src/pycom/pycom:main'
+            'pycom=src.pycom.pycom:main'
         ]
     }
 )
