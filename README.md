@@ -27,7 +27,7 @@
 Simply:
 ```bash
 git clone https://github.com/Omyyyy/pycom.git
-cd pycom
+cd pycom/src
 pip install -r requirements.txt
 pip install -e .
 ``` 
