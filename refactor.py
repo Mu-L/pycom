@@ -53,7 +53,7 @@ def refactorforcompiler(code: list):
 
         strippedlines = [str(line[0]).strip() for line in lineandindlevel]
 
-        definanylines = any([line.startswith("def") for line in strippedlines])
+        definanylines = any([line.startswith("def") or line.startswith("class") for line in strippedlines])
 
         if not definanylines:
             lineandindlevel.append((" " * int(lineandindlevel[-1][1]) + "exit(1)", 0))

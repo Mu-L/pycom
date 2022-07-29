@@ -164,27 +164,27 @@ def main():
     )
     parser.add_argument(
         '-d', '--debug', action='store_true',
-        help='Run in debug mode'
+        help='Print all tokens of file into "temptests/test.txt". Defaults to off. (DEV ONLY)'
     )
     parser.add_argument(
         '-t', '--tokens', action='store_true',
-        help='Print tokens and exit'
+        help='Print tokens and exit. Defaults to off.'
     )
     parser.add_argument(
         '-rt', '--rawtokens', action='store_true',
-        help='Print raw tokens and exit'
+        help='Print raw/unfiltered tokens and exit. Defaults to off.'
     )
     parser.add_argument(
         '-fp', '--failprint', action='store_true',
-        help='Print on failure'
+        help='Print generated C++ code if compilation fails. Defaults to off.'
     )
     parser.add_argument(
         '-p', '--print', action='store_true',
-        help='Print compiled code and exit'
+        help='Print generated C++ code and exit. Defaults to off.'
     )
     parser.add_argument(
         '-v', '--verbose', action='store_true',
-        help='Run with verbose logging'
+        help='Run with verbose logging. Defaults to off.'
     )
     parser.add_argument(
         '-te', '--test', action='store_true',
@@ -192,7 +192,7 @@ def main():
     )
     parser.add_argument(
         '-ge', '--gpperrors', action='store_true',
-        help='Print gpp errors'
+        help='Print g++ errors compiler errors instead of Pycom ones. Defaults to off.'
     )
     parser.add_argument('source_file', type=str, help='Source file')
     parsed_args = parser.parse_args()

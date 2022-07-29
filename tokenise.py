@@ -338,6 +338,9 @@ def gettokens(filename: str, verbose: bool):
                             token_list[i] = ("PARAM", token_list[i][1])
                             varnames.append(token_list[i][1])
 
+                if token_list[i] == ("IMPORTREF", "sys") and token_list[i+1] == ("SIG", "DOT") and token_list[i+2] == ("METHOD", "argv"):
+                    token_list[i], token_list[i+1], token_list[i+2] = ("NAME", "argv"),  ("SIG", "BLANK"), ("SIG", "BLANK")
+
                 if token_list[i][1] in funcnames and token_list[i-1] != ("KW", "def"):
                     token_list[i] = (
                                 "FUNCREF", token_list[i][1])

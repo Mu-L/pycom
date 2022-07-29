@@ -64,8 +64,8 @@ types = ["str", "int", "float", "list", "bool", "strlist", "floatlist", "None"]
 
 typecomparisons = ["const std::type_info& inttype = typeid(int);", "const std::type_info& floattype = typeid(float);"]
 
-includes = ["iostream", "string", "headers/range.hpp", "cmath",
-            "sstream", "headers/fmt/format.h", "vector", "boost/multiprecision/cpp_int.hpp", "typeinfo", "headers/stdpy.hpp"]
+includes = ["iostream", "string", "headers/other/range.hpp", "cmath",
+            "sstream", "headers/fmt/format.h", "vector", "boost/multiprecision/cpp_int.hpp", "typeinfo", "headers/builtins/stdpy.hpp"]
 
 using = ["util::lang::range"]
 
@@ -138,6 +138,9 @@ def parsetabamount(tabtok):
 def removenewlinedups(x):
     return [x[i] for i in range(len(x)) if (i == 0) or (x[i] != x[i-1]) or (x[i] != ("SIG", "NEWLINE"))]
 
+def removeblanks(x):
+    return [tok for tok in x if tok != ("SIG", "BLANK")]
+
 
 class Compile:
     def __init__(self, tokens: list, verbose: bool, filename: str):
@@ -163,7 +166,7 @@ class Compile:
         code += '\nstd::string operator * (std::string a, unsigned int b) {std::string output = "";while (b--) {output += a;}return output;}\n'
 
         if ("KW", "def") not in self.oktokens and ("KW", "class") not in self.oktokens:
-            code += "int main(){\n"
+            code += "int main(int argc, char *argv[]){\n"
 
         if self.verbose:
             print(f"[INFO]: Started converting {self.filename} to C++ IR;\n")
@@ -324,7 +327,7 @@ class Compile:
                     code += "false "
 
                 elif self.oktokens[i][self.value] == "import":
-                    code = f'#include "headers/py{self.oktokens[i+1][self.value]}.hpp"\n{str(self.oktokens[i+1][self.value]).capitalize()} {self.oktokens[i+1][self.value]};\n' + code
+                    code = f'#include "headers/builtins/py{self.oktokens[i+1][self.value]}.hpp"\n{str(self.oktokens[i+1][self.value]).capitalize()} {self.oktokens[i+1][self.value]};\n' + code
 
                 else:
                     print(
@@ -428,6 +431,6 @@ class Compile:
 
         oktokens = temp
 
-        oktokens = removenewlinedups(oktokens)
+        oktokens = removeblanks(removenewlinedups(oktokens))
 
         return oktokens

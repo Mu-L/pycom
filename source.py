@@ -1,7 +1,3 @@
-import os
+import sys
 
-try:
-    os.chdir("fff")
-
-except FileNotFoundError:
-    print("?")
+print(sys.argv[0])
