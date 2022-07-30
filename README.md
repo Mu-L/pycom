@@ -69,6 +69,13 @@ If you followed the installation instructions correctly, this will work in every
 
 ### Run tests
 
+First, install testing dependencies
+
+```bash
+pip install -r test-requirements.txt
+```
+
+Then you can run tests with
 ```bash
 # Unit tests
 pytest tests
