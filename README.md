@@ -60,7 +60,6 @@ If you followed the installation instructions correctly, this will work in every
 
 ### Python dependencies:
 > Python version 3.10+  
-> 'colorama' module (install with pip install -r requirements.txt)
 
 ### C++ dependencies:
 > A recent version of the g++ compiler  
