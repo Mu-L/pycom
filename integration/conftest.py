@@ -1,12 +1,10 @@
-import platform
-
 import pytest
 import os
 
 @pytest.fixture
 def pycom_path():
 	working_dir = os.getcwd()
-	return os.path.join(working_dir, 'src', 'pycom', 'pycom.py')
+	return os.path.join(working_dir, 'src', 'pycom', 'main.py')
 
 
 @pytest.fixture

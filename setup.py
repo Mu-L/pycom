@@ -1,10 +1,11 @@
 from setuptools import setup
+
 setup(
     name='pycom',
-    version='1.0.0',
+    version='1.1.0',
     entry_points={
         'console_scripts': [
-            'pycom=pycom.pycom:main'
+            'pycom=pycom.main:main'
         ]
     }
 )
