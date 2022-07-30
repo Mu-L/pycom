@@ -8,12 +8,13 @@ THE FOLLOWING BUILTINS ARE NOT SUPPORTED YET:
 
 
 
-import tokenize
-import sys
-import refactor
 import os
 import re
+import sys
 import time
+import tokenize
+
+from pycom import refactor
 
 tokmap = {
     "\n": "NEWLINE",
