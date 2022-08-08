@@ -63,27 +63,41 @@ def run_compile(flags: Namespace):
         print(compiledcode)
         exit(1)
 
+    outname = filename.split('.')[0]
+    if output:
+        outname = output
+    elif _platform not in ("Linux", "Darwin"):
+        outname += '.exe'
+
     if fastmath:
-        if not output:
-            cmd = f"echo '{compiledcode}' | g++ -std=c++20 -O3 -w -xc++ - -o {filename.split('.')[0]}" if _platform == "Linux" else f"g++ -std=c++20 -O3 -w -xc++ -o {filename.split('.')[0]}.exe -"
-        else:
-            cmd = f"echo '{compiledcode}' | g++ -std=c++20 -O3 -w -xc++ - -o {output}" if _platform == "Linux" else f"g++ -std=c++20 -O3 -w -xc++ -o {output}.exe -"
-
+        opt = '-O3'
+    elif _platform == "Linux":
+        opt = '-O2'
     else:
-        if not output:
-            cmd = f"echo '{compiledcode}' | g++ -std=c++20 -O2 -w -xc++ - -o {filename.split('.')[0]}" if _platform == "Linux" else f"g++ -std=c++20 -O3 -w -xc++ -o {filename.split('.')[0]}.exe -"
-        else:
+        opt = '-O3'
 
-            cmd = f"echo '{compiledcode}' | g++ -std=c++20 -O2 -w -xc++ - -o {output}" if _platform == "Linux" else f"g++ -std=c++20 -O3 -w -xc++ -o {output}.exe -"
+    cmd = [
+        "g++",
+        "-std=c++20",
+        opt,
+        "-w",
+        "-xc++",
+        "-o", outname,
+        "-",
+    ]
 
-    if _platform != "Linux":
-        cmd = shlex.split(cmd)
+    process = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stdin=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
 
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
-                               stderr=subprocess.PIPE, shell=True)
-
-    if _platform != "Linux":
+    if _platform in ("Linux", "Darwin"):
+        process.stdin.write(compiledcode.encode('utf-8'))
+    else:
         process.stdin.write(str.encode(compiledcode))
+        # XXX: not sure if this is actually needed on Windows
         process.stdin.close()
 
     output, error = process.communicate()
