@@ -1,6 +1,6 @@
 # Pycom: A Python Compiler
 
-#### It's called README.md for a reason. Read it thoroughly before creating a new issue.
+## Deprecated; lost motivation as it got too complex and I didn't feel like continuing
 
 #### Supported platforms: Windows, Linux
 
