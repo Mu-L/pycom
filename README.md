@@ -1,6 +1,7 @@
 # Pycom: A Python Compiler
 
-## Deprecated; lost motivation as it got too complex and I didn't feel like continuing
+## Don't use it for your own sanity
+## Deprecated; lost motivation as it got too complex and I didn't feel like continuing. It also just doesn't work. Was a naive approach to building a compiler and I've learned a lot since. I'll leave it public as a sort of warning of what not do when taking up something like this.
 
 #### Supported platforms: Windows, Linux
 
